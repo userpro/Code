@@ -1,3 +1,5 @@
+// 与hdu1325题目相同 但hdu1325数据强于此题
+// 此题解答过不了强数据
 #include <cstdio>
 #include <cstring>
 
@@ -8,7 +10,7 @@ bool V[MAXN];
 int findd(int x)
 {
     if (-1==F[x]) return x;
-    return findd(F[x]);
+    return F[x]=findd(F[x]);
 }
 
 int main()
@@ -19,7 +21,7 @@ int main()
     while (1)
     {
         scanf("%d%d",&u,&v);
-        if (u==-1&&v==-1) break;
+        if (u<0||v<0) break;
         if (u==0&&v==0)
         {
             memset(F,-1,sizeof(F));
