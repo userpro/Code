@@ -1,3 +1,6 @@
+/*
+离散化
+*/
 #include <cstdio>
 #include <cstring>
 #include <iostream>

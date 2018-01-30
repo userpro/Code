@@ -14,10 +14,8 @@ void init(int n)
 
 int findd(int x)
 {
-    if (fa[x] == x)
-        return x;
-    else
-        return fa[x] = findd(fa[x]);
+    if (fa[x] == x) return x;
+    return fa[x] = findd(fa[x]);
 }
 
 void unite(int x, int y)

@@ -1,3 +1,7 @@
+/*
+带权并查集
+离线反向执行
+*/
 #include <cstdio>
 #include <cstring>
 #include <iostream>

@@ -1,3 +1,6 @@
+/*
+枚举 带权并查集
+*/
 #include <cstdio>
 #include <cstring>
 
