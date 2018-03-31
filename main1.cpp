@@ -1,122 +1,58 @@
-/**
-0 (1) 1
-(3) 2 0 3
-(2) 1 3
-(3) 1 2 4
-(1) 3
-(1) 6
-(1) 7
-(0)
-*/
-
-#include <iostream>
-#include <cstdlib>
-#include <cstdio>
-#include <algorithm>
-#include <vector>
-#include <queue>
-#include <cmath>
-#include <stack>
-#include <cstring>
-using namespace std;
-#define INF 0xfffffff
-#define maxn 11005
-#define min(a,b) (a<b?a:b)
-/** 无向图求桥 **/struct node
+#include<stdio.h>
+#include<math.h>
+int num[100010],f[100010],MAX[100010][20];
+int n;
+int max(int a,int b)
 {
-    int x, y;
-    bool friend operator < (node A,node B)
-    {
-        if(A.x == B.x)
-            return A.y < B.y;
-        return A.x < B.x;
-    }
-}bridge[maxn];
-int n, dfn[maxn], low[maxn], Father[maxn], Time;
-vector<int> G[maxn];
-
-void init()
-{
-    memset(dfn, 0, sizeof(dfn));
-    memset(low, 0, sizeof(low));
-    memset(Father, 0, sizeof(Father));
-    Time = 0;
-    for(int i=0; i<n; i++)
-        G[i].clear();
+    return a>b?a:b;
 }
-
-void Tarjan(int u,int fa)
+void ST()
 {
-    Father[u] = fa;
-    low[u] = dfn[u] = ++Time;
-    int len = G[u].size(), v;
-
-    for(int i=0; i<len; i++)
-    {
-        v = G[u][i];
-
-        if( !low[v] )
-        {
-            Tarjan(v, u);
-            low[u] = min(low[u], low[v]);
-        }
-        else if(fa != v)
-            low[u] = min(low[u], dfn[v]);
-    }
+    int i,j,k;
+    for(i=1;i<=n;i++)
+        MAX[i][0]=f[i];
+    k=log((double)(n+1))/log(2.0);
+    for(j=1;j<=k;j++)
+        for(i=1;i+(1<<j)-1<=n;i++)
+            MAX[i][j]=max(MAX[i][j-1],MAX[i+(1<<(j-1))][j-1]);
 }
-
-void solve()
+int rmq_max(int l,int r)
 {
-    int ans = 0;
-    for(int i=0; i<n; i++)
-    {
-        if(!low[i])
-            Tarjan(i, -1);
-    }
-
-    for(int i=0; i<n; i++)
-    {
-        int v = Father[i];
-        if(v != -1 && dfn[v] < low[i])
-        {
-
-            bridge[ans].x = i;
-            bridge[ans].y = v;
-
-            if(bridge[ans].x > bridge[ans].y)
-                swap(bridge[ans].x, bridge[ans].y);
-            ans ++;
-        }
-    }
-    sort(bridge, bridge + ans);
-
-    printf("%d critical links\n", ans);
-
-    for(int i=0; i<ans; i++)
-    {
-        printf("%d - %d\n",bridge[i].x,bridge[i].y);
-    }
-    printf("\n");
+    if(l>r)
+        return 0;
+    int k=log((double)(r-l+1))/log(2.0);
+    return max(MAX[l][k],MAX[r-(1<<k)+1][k]);
 }
-
 int main()
 {
-    while(scanf("%d",&n) != EOF)
+    int q,i,a,b;
+    while(scanf("%d",&n)&&n)
     {
-        init();
-        for(int i=0; i<n; i++)
+        scanf("%d",&q);
+        for(i=1;i<=n;i++)
         {
-            int a, b, m;
-            scanf("%d (%d)",&a,&m);
-
-            while(m--)
+            scanf("%d",&num[i]);
+            if(i==1)
             {
-                scanf("%d", &b);
-                G[a].push_back(b);
-                G[b].push_back(a);
+                f[i]=1;
+                continue;
             }
+            if(num[i]==num[i-1])
+                f[i]=f[i-1]+1;
+            else
+                f[i]=1;
         }
-        solve();
+        ST();
+        for(i=1;i<=q;i++)
+        {
+            scanf("%d%d",&a,&b);
+            int t=a;
+            while(t<=b&&num[t]==num[t-1])
+                t++;
+            int cnt=rmq_max(t,b);
+            int ans=max(t-a,cnt);
+            printf("%d\n",ans);
+        }
     }
     return 0;
 }

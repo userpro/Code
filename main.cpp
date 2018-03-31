@@ -1,117 +1,67 @@
+/*
+将原序列转换一下, 
+if(num[i]==num[i-1])
+    f[i]=f[i-1]+1;
+else
+    f[i]++;
+
+对于每个询问(l,r), 分为两个部分
+前半部分求与l之前相同的数的个数直到t, 后半部分从t开始直接用RMQ求解最大值就行了.
+最后结果为max(前半部分,后半部分).
+*/
 #include <cstdio>
 #include <cstring>
-#include <algorithm>
-#include <vector>
+#include <cmath>
 
-using namespace std;
-#define MAXN 40010
-#define MAXM 210
-struct Edge
-{
-    int v;
-    int w;
-    int next;
-} E[MAXN<<1];
-struct Question
-{
-    int u;
-    int v;
-    int next;
-    int lca;
-} Q[MAXN];
-int head[MAXN],headq[MAXN];
-int fa[MAXN],anc[MAXM];
-int dis[MAXN];
-bool vis[MAXN];
-int Eindex,Qindex;
-int T,n,m;
+#define MAXN 100010
+#define max(a,b) (a>b?a:b)
+int num[MAXN],f[MAXN],rmax[MAXN][20];
+int n,q;
 
-void add(int u,int v,int w)
+void RMQ(int _n)
 {
-    E[Eindex].v=v;
-    E[Eindex].w=w;
-    E[Eindex].next=head[u];
-    head[u]=Eindex++;
+    int i,j,k;
+    for (i=1;i<=_n;i++)
+        rmax[i][0]=f[i];
+    k=log((double)(_n+1))/log(2.0);
+    for (j=1;j<=k;j++)
+        for (i=1;i+(1<<j)-1<=_n;i++)
+            rmax[i][j]=max(rmax[i][j-1], rmax[i+(1<<(j-1))][j-1]);
 }
 
-void addq(int u,int v)
+int rmq_max(int l,int r)
 {
-    Q[Qindex].lca=0;
-    Q[Qindex].v=v;
-    Q[Qindex].u=u;
-    Q[Qindex].next=headq[u];
-    headq[u]=Qindex++;
+    if (l>r)
+        return 0;
+    int k=log((double)(r-l+1))/log(2.0);
+    return max(rmax[l][k], rmax[r-(1<<k)+1][k]);
 }
 
-void _init()
-{
-    memset(head,-1,sizeof(head));
-    memset(headq,-1,sizeof(headq));
-    memset(vis,false,sizeof(vis));
-    memset(dis,0,sizeof(dis));
-    Eindex=Qindex=0;
-}
-
-int findd(int x)
-{
-    if (fa[x]==x)
-        return x;
-    return fa[x]=findd(fa[x]);
-}
-
-void unionn(int x,int y)
-{
-    x=findd(x);
-    y=findd(y);
-    if (x!=y)
-        fa[x]=y;    
-}
-
-void tarjan(int u)
-{
-    vis[u]=true;
-    anc[u]=fa[u]=u;
-    for (int i=head[u];i!=-1;i=E[i].next)
-    {
-        int v=E[i].v;
-        int w=E[i].w;
-        if (!vis[v])
-        {
-            dis[v]=dis[u]+w;
-            tarjan(v);
-            unionn(u,v);
-            anc[findd(u)]=u;
-        }
-    }
-    for (int i=headq[u];i!=-1;i=Q[i].next)
-        if (vis[Q[i].v])
-            Q[i].lca=anc[findd(Q[i].v)];
-}
-
-int a,b,w;
+int a,b;
 int main()
 {
-    while (scanf("%d",&T)!=EOF)
+    while (scanf("%d",&n)&&n)
     {
-        _init();
-        scanf("%d%d",&n,&m);
-        for (int i=1;i<n;i++)
+        scanf("%d",&q);
+        f[0]=0;
+        for (int i=1;i<=n;i++)
         {
-            scanf("%d%d%d",&a,&b,&w);
-            add(a,b,w);
-            add(b,a,w);
+            scanf("%d",&num[i]);
+            if (num[i]==num[i-1])
+                f[i]=f[i-1]+1;
+            else
+                f[i]=1;
         }
-        for (int i=1;i<=m;i++)
+        RMQ(n);
+        for(int i=1;i<=q;i++)
         {
             scanf("%d%d",&a,&b);
-            addq(a,b);
-        }
-        tarjan(1);
-        for (int i=1;i<=m;i++)
-        {
-            printf("%d\n", E[Q[i].lca].w);
-            // int u=Q[i].u,v=Q[i].v,lca=Q[i].lca;
-            // printf("%d\n", dis[u]+dis[v]-2*dis[lca]);
+            int t=a;
+            while(t<=b&&num[t]==num[t-1])
+                t++;
+            int cnt=rmq_max(t,b);
+            int ans=max(t-a,cnt);
+            printf("%d\n",ans);
         }
     }
     return 0;
