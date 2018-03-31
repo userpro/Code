@@ -1,0 +1,7 @@
+:Orz
+rand.exe
+a.exe
+a1.exe
+fc a.out a1.out
+if errorlevel == 1 pause
+goto Orz

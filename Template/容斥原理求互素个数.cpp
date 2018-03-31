@@ -12,7 +12,7 @@ int solve (int n, int r) {
     int sum = 0;
     for (int msk=1; msk<(1<<p.size()); ++msk) {
         int mult = 1, bits = 0;
-        for (int i=0; i<(int)p.size(); ++i)
+        for (int i=0; i<p.size(); ++i)
             if (msk & (1<<i)) {
                 ++bits;
                 mult *= p[i];
