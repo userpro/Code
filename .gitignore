@@ -2,4 +2,6 @@
 *.out
 *.jpg
 *.gif
-./test-Template
+test-Template/*
+*.html
+
