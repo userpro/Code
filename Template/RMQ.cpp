@@ -1,3 +1,16 @@
+// https://blog.csdn.net/niushuai666/article/details/6624672/
+
+void RMQ1(int num) //预处理->O(nlogn)  
+{  
+    for(int j = 1; j < 20; ++j)  
+        for(int i = 1; i <= num; ++i)  
+            if(i + (1 << j) - 1 <= num)  
+            {  
+                maxsum[i][j] = max(maxsum[i][j - 1], maxsum[i + (1 << (j - 1))][j - 1]);  
+                minsum[i][j] = min(minsum[i][j - 1], minsum[i + (1 << (j - 1))][j - 1]);  
+            }  
+} 
+
 void RMQ(int _n)
 {
     int i,j,k;
