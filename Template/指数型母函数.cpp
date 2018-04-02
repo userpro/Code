@@ -35,12 +35,9 @@ int main()
         for(i = 1; i < n; i++)
         {
             for(j = 0; j <= m; ++j)
-            {
                 for(k = 0; k + j <= m && k <= val[i]; ++k)
-                {
                     c2[j + k] += c1[j]/a[k];
-                }
-            }
+                
             for(j = 0; j <= m; ++j)
             {
                 c1[j] = c2[j];

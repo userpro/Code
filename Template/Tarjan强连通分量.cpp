@@ -1,4 +1,4 @@
-void tarjan(int i)
+void Tarjan(int i)
 {
     int j;
     DFN[i]=LOW[i]=++Dindex;
@@ -9,7 +9,7 @@ void tarjan(int i)
         j=e->t;
         if (!DFN[j])
         {
-            tarjan(j);
+            Tarjan(j);
             if (LOW[j]<LOW[i])
                 LOW[i]=LOW[j];
         }
@@ -35,5 +35,5 @@ void solve()
     memset(DFN,0,sizeof(DFN));
     for (i=1;i<=N;i++)
         if (!DFN[i])
-            tarjan(i);
+            Tarjan(i);
 }
