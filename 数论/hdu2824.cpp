@@ -1,3 +1,4 @@
+// 欧拉函数
 #include <cstdio>
 #include <cstring>
 #include <algorithm>

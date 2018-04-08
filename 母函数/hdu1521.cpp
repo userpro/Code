@@ -1,3 +1,4 @@
+// 指数型母函数
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
