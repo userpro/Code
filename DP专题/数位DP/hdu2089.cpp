@@ -1,4 +1,5 @@
 // 数位DP
+// 给定区间[n,m],求在n到m中没有“62“或“4“的数的个数。如62315包含62，88914包含4，这两个数都是不合法的
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
