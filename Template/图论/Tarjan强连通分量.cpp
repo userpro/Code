@@ -1,56 +1,97 @@
-const int maxn=5010;
-// Belong 数组存强连通分量
-vector<int> G[maxn];
-int DFN[maxn],LOW[maxn],Stap[maxn],Belong[maxn];
-bool instack[maxn];
-int Stop,Dindex,Bcnt;
-void Tarjan(int u)
+#include<queue>
+#include<cstdio>
+#include<vector>
+#include<cstring>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+#define inf 0x3f3f3f3f
+
+const int maxn=10010;
+vector<int> g[maxn];
+int color[maxn],dfn[maxn<<1],low[maxn<<1],stack[maxn<<1],vis[maxn],cnt[maxn];
+int deep,top,sum;
+
+void tarjan(int u)
 {
-    int tmp;
-    DFN[u]=LOW[u]=++Dindex;
-    instack[u]=true;
-    Stap[++Stop]=u;
-    int sz=G[u].size();
-    for (int i=0;i<sz;i++)
+    dfn[u]=++deep;
+    low[u]=deep;
+    vis[u]=1;
+    stack[++top]=u;
+    int sz=g[u].size();
+    for(int i=0;i<sz;i++)
     {
-        int v=G[u][i];
-        if (!DFN[v])
+        int v=g[u][i];
+        if(!dfn[v])
         {
-            Tarjan(v);
-            if (LOW[v]<LOW[u])
-                LOW[u]=LOW[v];
+            tarjan(v);
+            low[u]=min(low[u],low[v]);
         }
-        else if (instack[v] && DFN[v]<LOW[u])
-            LOW[u]=DFN[v];
+        else
+        {
+            if(vis[v])
+            {
+                low[u]=min(low[u],low[v]);
+            }
+        }
     }
-    if (DFN[u]==LOW[u])
+    if(dfn[u]==low[u])
     {
-        Bcnt++;
-        do
+        color[u]=++sum;
+        vis[u]=0;
+        while(stack[top]!=u)
         {
-            tmp=Stap[Stop--];
-            instack[tmp]=false;
-            Belong[tmp]=Bcnt;
+            color[stack[top]]=sum;
+            vis[stack[top--]]=0;
         }
-        while (tmp!=u);
+        top--;
     }
 }
 
 void _init()
 {
-    for (int i=0;i<maxn;i++) G[i].clear();
-    memset(DFN,0,sizeof(DFN));
-    memset(LOW,0,sizeof(LOW));
-    memset(instack,0,sizeof(instack));
-    memset(Belong,-1,sizeof(Belong));
+    for (int i=0;i<maxn;i++) g[i].clear();
+    deep=top=sum=0;
+    memset(color,0,sizeof(color));
+    memset(dfn,0,sizeof(dfn));
+    memset(low,0,sizeof(low));
+    memset(stack,0,sizeof(stack));
+    memset(vis,0,sizeof(vis));
+    memset(cnt,0,sizeof(cnt));
 }
 
-void solve(int n)
+int n,m;
+int main()
 {
-    int i;
-    Stop=Bcnt=Dindex=0;
-    memset(DFN,0,sizeof(DFN));
-    for (i=1;i<=n;i++)
-        if (!DFN[i])
-            Tarjan(i);
+    while (scanf("%d%d",&n,&m))
+    {
+        _init();
+        for(int i=1;i<=m;i++)
+        {
+            int from,to;
+            scanf("%d%d",&from,&to);
+            g[from].push_back(to);
+        }
+        for(int i=1;i<=n;i++)
+        {
+            if(!dfn[i])
+            {
+                tarjan(i);
+            }
+        }
+        for(int i=1;i<=n;i++)
+        {
+            cnt[color[i]]++;
+        }
+
+        int ans=0;
+        for(int i=1;i<=sum;i++)
+        {
+            if(cnt[i]>1)
+            {
+                ans++;
+            }
+        }
+        printf("%d\n",ans);
+    }
 }
