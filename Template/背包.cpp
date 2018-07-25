@@ -23,7 +23,7 @@ void MultiplePack(int ni, int ci, int wi) {
         return;  
     }  
     int k = 1, amount = ni;  
-    while (k < ni) {  
+    while (k < amount) {  
         ZeroOnePack(ci * k, wi * k);  
         amount -= k;  
         k *= 2;  
@@ -33,7 +33,7 @@ void MultiplePack(int ni, int ci, int wi) {
   
 int main(void) {  
     int cases, n, ni, ci, wi;  
-    freopen("4.txt", "r", stdin);  
+    freopen("1.txt", "r", stdin);  
     cin >> cases;  
     while (cases--) {  
         memset(f, 0, sizeof(f));  
