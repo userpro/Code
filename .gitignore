@@ -1,5 +1,6 @@
 *.out
 *.png
+*.pdf
 *.jpg
 *.gif
 test-Template/*
