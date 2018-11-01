@@ -73,7 +73,7 @@ int solve(int sta,int len1)
     getdis(sta,0,len1);
     sort(dis+1,dis+dcnt+1);
     int L=1,R=dcnt,ret=0;
-    while (L<=R) // 二分
+    while (L<=R)
     {
         if (dis[R]+dis[L]<=K) 
         {

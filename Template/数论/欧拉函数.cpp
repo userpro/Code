@@ -9,9 +9,8 @@ const int maxn=3e6+5;
 
 int get_phi1(int n)
 {
-    int m=sqrt(n+0.5);
     int ans=n;
-    for (int i = 2; i <= m; ++i)
+    for (int i = 2; i*i <= n; ++i)
     {
         if (n%i==0)
         {
