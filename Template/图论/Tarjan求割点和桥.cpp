@@ -39,23 +39,25 @@ void Tarjan(int i,int Father)
 }
 void count()
 {
+    // 割点
     int rootson=0;
     Tarjan(1,0);
     for(int i=2;i<=n;++i)
     {
         int v=father[i];
         if(v==1)
-        rootson++;/*统计根节点子树的个数，根节点的子树个数>=2,就是割点*/
+            rootson++;/*统计根节点子树的个数，根节点的子树个数>=2,就是割点*/
         else{
             if(low[i]>=dfn[v])/*割点的条件*/
             is_cut[v]=true;
         }
     }
-    if(rootson>1)
-    is_cut[1]=true;
+    if(rootson>1) is_cut[1]=true;
     for(int i=1;i<=n;++i)
-    if(is_cut[i])
-    printf("%d\n",i);
+        if(is_cut[i])
+            printf("%d\n",i);
+
+    // 桥
     for(int i=1;i<=n;++i)
     {
         int v=father[i];
