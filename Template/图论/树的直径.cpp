@@ -21,10 +21,10 @@ void _init() {
 }
 
 inline void add(int u,int v) {
-    edge[++cnt].v=v;
+    edge[cnt].v=v;
     edge[cnt].w=1;
     edge[cnt].nx=head[u];
-    head[u]=cnt;
+    head[u]=cnt++;
 }
 
 int dfs(int u,int fa) {

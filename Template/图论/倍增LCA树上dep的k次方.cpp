@@ -1,3 +1,5 @@
+// bzoj5293
+// 生成了一棵有根树, 多次询问这棵树上一段路径上所有节点深度的k 次方和, 而且每次的k 可能是不同的
 #include <cstdio>
 #include <cstring>
 #include <vector>
