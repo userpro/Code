@@ -12,14 +12,12 @@ const LL mod=998244353;
 int n,m;
 vector<int> G[maxn];
 bool vis[maxn];
-int bin[26],fa[maxn][26],depth[maxn];
+int Log[26],fa[maxn][26],depth[maxn];
 LL sum[maxn][55];
  
-inline LL qpow(LL x,int y)
-{
+inline LL qpow(LL x,int y) {
     LL ret=1;
-    while (y>0)
-    {
+    while (y>0) {
         if (y&1) ret=ret*x%mod;
         x=x*x%mod;
         y>>=1;
@@ -27,17 +25,14 @@ inline LL qpow(LL x,int y)
     return ret;
 }
  
-void dfs(int u)
-{
-    for (int i=1;bin[i]<=depth[u];i++)
+void dfs(int u) {
+    for (int i=1;Log[i]<=depth[u];i++)
         fa[u][i]=fa[fa[u][i-1]][i-1];
  
     int sz=G[u].size();
-    for (int i=0;i<sz;i++)
-    {
+    for (int i=0;i<sz;i++) {
         int v=G[u][i];
-        if (v!=fa[u][0])
-        {
+        if (v!=fa[u][0]) {
             fa[v][0]=u;
             depth[v]=depth[u]+1;
             dfs(v);
@@ -45,49 +40,46 @@ void dfs(int u)
     }
 }
  
-void cal(int u)
-{
+void cal(int u) {
     for (int i=1;i<=50;i++)
         sum[u][i]=sum[fa[u][0]][i]+qpow(depth[u]-1,i);
  
     int sz=G[u].size();
-    for (int i=0;i<sz;i++)
-    {
+    for (int i=0;i<sz;i++) {
         int v=G[u][i];
         if (v!=fa[u][0]) cal(v);
     }
 }
  
-int lca(int x,int y)
-{
+int lca(int x,int y) {
     if (depth[x]<depth[y]) swap(x,y);
-    for (int i=20;i>=0;i--)
-        if (bin[i]<=depth[x] && depth[fa[x][i]]>=depth[y])
-            x=fa[x][i];
+    for (int i=24;i>=0;i--) {
+        if (depth[fa[x][i]]>=depth[y]) x=fa[x][i];
+        if (x==y) return x;
+    }
  
-    if (x==y) return x;
-    for (int i=20;i>=0;i--)
-        if (bin[i]<=depth[x] && fa[x][i]!=fa[y][i])
-            x=fa[x][i],y=fa[y][i];
+    for (int i=24;i>=0;i--) {
+        if (fa[x][i]!=fa[y][i]) {
+            x=fa[x][i];
+            y=fa[y][i];
+        }
+    }
  
     return fa[x][0];
 }
  
-inline LL solve(int x,int y,int k)
-{
+inline LL solve(int x,int y,int k) {
     LL la=lca(x,y);
     return (sum[x][k]+sum[y][k]-sum[la][k]-sum[fa[la][0]][k])%mod;
 }
  
-int main()
-{
+int main() {
     //freopen("1.txt","r",stdin);
-    bin[0]=1;
-    for (int i=1;i<=20;i++) bin[i]=bin[i-1]<<1;
+    Log[0]=1;
+    for (int i=1;i<=20;i++) Log[i]=Log[i-1]<<1;
     scanf("%d",&n);
     int u,v;
-    for (int i=0;i<n-1;i++)
-    {
+    for (int i=0;i<n-1;i++) {
         scanf("%d%d",&u,&v);
         G[u].push_back(v);
         G[v].push_back(u);
@@ -98,8 +90,7 @@ int main()
  
     scanf("%d",&m);
     int x,y,k;
-    for (int i=0;i<m;i++)
-    {
+    for (int i=0;i<m;i++) {
         scanf("%d%d%d",&x,&y,&k);
         printf("%lld\n",solve(x,y,k));
     }

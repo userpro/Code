@@ -1,4 +1,4 @@
-// 本题要求对p取模 记得开 long long!!!
+// bzoj1798 本题要求对p取模 记得开 long long!!!
 #include <cstdio>
 #include <cstring>
 #include <algorithm>

@@ -1,3 +1,4 @@
+// bzoj1051 缩点后判断出度为0的点
 #include <cstdio>
 #include <cstring>
 #include <algorithm>

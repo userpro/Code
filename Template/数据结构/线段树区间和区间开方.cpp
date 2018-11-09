@@ -1,3 +1,4 @@
+// bzoj3211  线段树模板题
 // pushup：
 // (1)build的结尾，当叶子节点分别有对应的值后，它的父亲们就等于它们求和。
 // (2)update的结尾，因为此时当前根的左右孩子已经更新了，故它也需要更新。
@@ -43,7 +44,7 @@ void update(int k,int l,int r,int x,int y) {
         return;
     }
     int mid=(l+r)>>1;
-    // -> pushdown
+    // -> pushdown 此题不需要
     update(k<<1,l,mid,x,y);
     update(k<<1|1,mid+1,r,x,y);
     pushup(k);
@@ -53,7 +54,7 @@ LL query(int k,int l,int r,int x,int y) {
     if (x>r||y<l) return 0;
     if (x<=l && y>=r) return sum[k];
     int mid=(l+r)>>1;
-    // -> pushdown
+    // -> pushdown 此题不需要
     LL res=0;
     if (mid>=x) res+=query(k<<1,l,mid,x,y);
     if (mid<y)  res+=query(k<<1|1,mid+1,r,x,y);

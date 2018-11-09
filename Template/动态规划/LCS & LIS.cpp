@@ -2,14 +2,11 @@
 const int maxn = 10000;
 int dp[maxn];
 int a[maxn],b[maxn];
-int LCS(int n, int m)
-{
+int LCS(int n, int m) {
     memset(dp, 0, sizeof(dp));
-    for(int i = 1; i <= n; i++)
-    {
+    for(int i = 1; i <= n; i++) {
         int tmp = 0; // 存 i 确定, 且 a[i] > b[j] 时最大的 dp[j]
-        for(int j = 1; j <= m; j++)
-        {
+        for(int j = 1; j <= m; j++) {
             if(a[i] > b[j] && dp[j] > tmp)
                 tmp = dp[j];
             else if(a[i] == b[j])
@@ -27,8 +24,7 @@ int LCS(int n, int m)
 const int maxn = 10000;
 int dp[maxn];
 int a[maxn];
-int LIS(int sign)
-{
+int LIS(int sign) {
     fill(dp,dp+maxn,inf);
     int ans = 0;
     for(int i=0;i<n;i++){
@@ -38,14 +34,5 @@ int LIS(int sign)
     }
     return ans;
 }
-
-
-int lins()
-{
-    return LIS(1);// 求上升的
-}
-
-int lnds()
-{
-    return LIS(-1);//求下降的
-}
+int lins() { return LIS(1); } // 求上升的
+int lnds() { return LIS(-1); } //求下降的

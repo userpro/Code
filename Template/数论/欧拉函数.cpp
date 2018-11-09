@@ -3,17 +3,13 @@
 #include <cmath>
 #include <cstring>
 #include <algorithm>
-
 using namespace std;
 const int maxn=3e6+5;
 
-int get_phi1(int n)
-{
+int get_phi1(int n) {
     int ans=n;
-    for (int i = 2; i*i <= n; ++i)
-    {
-        if (n%i==0)
-        {
+    for (int i = 2; i*i <= n; ++i) {
+        if (n%i==0) {
             ans=ans/i * (i-1);
             while (n%i==0) n/=i;
         }
@@ -23,23 +19,19 @@ int get_phi1(int n)
 }
 
 long long phi[maxn];
-void get_phi2(int n)
-{
+void get_phi2(int n) {
     memset(phi,0,sizeof(phi));
     phi[1]=1;
     for (int i = 2; i <= n; ++i)
-        if (!phi[i])
-        {
-            for (int j = i; j <= n; j+=i)
-            {
+        if (!phi[i]) {
+            for (int j = i; j <= n; j+=i) {
                 if (!phi[j]) phi[j]=j;
                 phi[j]=phi[j]/i * (i-1);
             }
         }
 }
 
-int main()
-{
+int main() {
     printf("%d\n", get_phi1(7));
     get_phi2(1000);
     for (int i = 0; i < 20; ++i)

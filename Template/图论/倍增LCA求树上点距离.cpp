@@ -27,8 +27,6 @@ void print(int x)
     putchar(x%10+'0');
 }
 
-
-
 void _init() {
     cnt=0;
     memset(head,-1,sizeof(head));

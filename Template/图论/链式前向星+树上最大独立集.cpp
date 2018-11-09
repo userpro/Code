@@ -13,56 +13,48 @@ struct E
     int w,to,next;
 }edge[maxn];
 
-void _init()
-{
+void _init() {
     memset(head,-1,sizeof(head));
     cnt=0;
 }
 
-void adde(int u,int v,int w)
-{
+void adde(int u,int v,int w) {
     edge[cnt].w=w;
     edge[cnt].to=v;
     edge[cnt].next=head[u];
     head[u]=cnt++;
 }
 
-int solve(int u,int v)
-{
+int solve(int u,int fa) {
     dp[u][0]=f[u];
     dp[u][1]=0;
-    for (int i=head[u];i!=-1;i=edge[i].next)
-    {
-        int to=edge[i].to;
-        if (to==v) continue;
-        solve(to,u);
-        dp[u][0]^=dp[to][1];
-        dp[u][1]=max(dp[u][1]^dp[to][0],dp[u][1]^dp[to][1]);
+    for (int i=head[u];i!=-1;i=edge[i].next) {
+        int v=edge[i].to;
+        if (v==fa) continue;
+        solve(v,u);
+        dp[u][0]^=dp[v][1];
+        dp[u][1]=max(dp[u][1]^dp[v][0],dp[u][1]^dp[v][1]);
     }
     return max(dp[u][0],dp[u][1]);
 }
 
-int main()
-{
+int main() {
     //freopen("1.txt","r",stdin);
     scanf("%d",&t);
-    while (t--)
-    {
+    while (t--) {
         _init();
         scanf("%d",&n);
         int u,v;
         int t=0;
-        for (int i=1;i<=n;i++)
-        {
+        for (int i=1;i<=n;i++) {
             scanf("%d",&f[i]);
             t^=f[i];
         }
-        for (int i=1;i<n;i++)
-        {
+        for (int i=1;i<n;i++) {
             scanf("%d%d",&u,&v);
             adde(u,v,f[u]);
         }
-        int q=solve(0,1);
+        int q=solve(1,0);
         t^=q;
         printf("%c\n",t==q?'D':t>q?'Q':'T');
     }

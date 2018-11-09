@@ -1,62 +1,53 @@
-#include<queue>
-#include<cstdio>
-#include<cstring>
-#include<algorithm>
-const int N=10005;
-const int M=20005;
-using namespace std;
-int n,m,t,oo;
-int v[M],w[M],next[M];
-int d[N],cnt[N],first[N];
-bool flag,vis[N];
-void add(int x,int y,int z)
+#include <vector>
+#include <cstring>
+const int inf=1<<29;
+const int maxn=110;
+
+struct Edge
 {
-    next[++t]=first[x];
-    first[x]=t;
-    v[t]=y;
-    w[t]=z;
+    int v,w,nx;
+}edge[maxn<<1];
+int cnt;
+int head[maxn]
+bool vis[maxn];
+int dis[maxn],num[maxn];
+
+void _init() {
+    cnt=0;
+    memset(head,-1,sizeof(head));
 }
-bool SPFA(int s)
-{
-    int x,y,i,j;
-    queue<int>q;
-    memset(d,127,sizeof(d));
-    memset(vis,false,sizeof(vis));
-    while(!q.empty())  q.pop();
-    d[s]=0;
-    cnt[s]=1;
-    q.push(s);
-    vis[s]=true;
-    while(!q.empty()) {
-        x=q.front();
-        q.pop();
-        vis[x]=false;
-        for(i=first[x];i;i=next[i]) {
-            y=v[i];
-            if(d[y]>d[x]+w[i]) {
-                d[y]=d[x]+w[i];
-                cnt[y]=cnt[x]+1;
-                if(cnt[y]>n) return false;
-                if(!vis[y]) {
-                    q.push(y);
-                    vis[y]=true;
+
+void add(int u,int v,int w) {
+    edge[cnt].v = v; edge[cnt].w = w;
+    edge[cnt++].nx = head[u];
+    edge[cnt].v = u; edge[cnt].w = w;
+    edge[cnt++].nx = head[v];
+}
+
+// n个顶点 1~n
+// 返回bool 是否存在负环
+bool spfa(int start, int n) {
+    memset(vis, 0, sizeof(vis));
+    for (int i = 1; i <= n; ++i) dis[i] = inf;
+    dis[start] = 0;
+    vis[start] = 1;
+    queue<int> que;
+    que.push(start);
+    while (!que.empty()) {
+        int u = que.front(); que.pop();
+        vis[u] = 0;
+        for (int i = head[u]; i != -1; i = edge[i].nx) {
+            int v = edge[i].v;
+            cnt[v] = cnt[u] + 1;
+            if (cnt[v] > n) return false; // 存在负环
+            if (dis[v] > dis[u] + edge[i].w) {
+                dis[v] = dis[u] + edge[i].w;
+                if (!vis[v]) {
+                    vis[v] = 1;
+                    que.push(v);
                 }
             }
         }
     }
     return true;
-}
-int main()
-{
-    int x,y,z,i;
-    scanf("%d%d",&n,&m);
-    for(i=1;i<=m;++i) {
-        scanf("%d%d%d",&x,&y,&z);
-        add(x,y,z);
-        add(y,x,z);
-    }
-    flag=SPFA(1);
-    if(!flag)  printf("Yes\n");
-    else  printf("No\n");
-    return 0;
 }
