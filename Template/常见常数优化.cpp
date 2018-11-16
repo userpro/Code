@@ -1,3 +1,5 @@
+#pragma GCC optimize(2)
+
 inline int read() {
     int ret=0;
     char ch=getchar();
