@@ -1,10 +1,11 @@
+// hdu1589
+// 可把vector换成下标数组 优化空间不大
 #include <cstdio>
 #include <cstring>
 #include <cmath>
 #include <vector>
 #include <algorithm>
 using namespace std;
-const double eps=1e-8;
 const long long inf=1e18;
 const int maxn=1e5+10;
 int n;
@@ -26,7 +27,7 @@ bool cmp_polar_angle(Point&p1,Point&p2) {
 }
 
 // 凸包
-vector<Point> GrahamScan(int len) {
+vector<Point> GrahamScan() {
     vector<Point> v;
     int idx=0;
     for (int i=1;i<n;i++) {
@@ -36,7 +37,7 @@ vector<Point> GrahamScan(int len) {
     sort(p+1,p+n,cmp_polar_angle);
     v.emplace_back(p[0]); v.emplace_back(p[1]);
     int top=1;
-    for (int i=2;i<len;++i) {
+    for (int i=2;i<n;++i) {
         while (top>0 && cross(v[top-1],p[i],v[top])>=0)
             top--,v.pop_back();
         top++,v.emplace_back(p[i]);
@@ -52,7 +53,7 @@ long long rotating_caliper(vector<Point> v) {
     else {
         v.emplace_back(v[0]);
         int j=2;
-        for (int i=0;i<len+1;i++) {
+        for (int i=0;i<len;i++) {
             while (cross(v[i],v[i+1],v[j])<cross(v[i],v[i+1],v[j+1]))
                 j=(j+1)%len;
             maxdis=max(maxdis,max(dis(v[i],v[j]),dis(v[j],v[i+1])));
@@ -80,7 +81,7 @@ long long closest_pair(int left,int right) {
     sort(closest_t.begin(), closest_t.end(),cmpy);
     int cnt=closest_t.size();
     for (int i=0;i<cnt;i++)
-        for (int j=i+1;j<cnt && closest_t[j].y-closest_t[i].y<d;j++)
+        for (int j=i+1;j<cnt && (closest_t[j].y-closest_t[i].y)*(closest_t[j].y-closest_t[i].y)<d;j++)
             d=min(d,dis(closest_t[i],closest_t[j]));
 
     return d;
@@ -91,10 +92,8 @@ int main() {
     int cas=0;
     while (~scanf("%d",&n) && n) {
         for (int i=0;i<n;i++) scanf("%lld%lld",&p[i].x,&p[i].y);
-
         // 最远点对(旋转卡壳)
-        long long maxdis=rotating_caliper(GrahamScan(n));
-
+        long long maxdis=rotating_caliper(GrahamScan());
         // 最近点对
         sort(p,p+n,cmpx);
         long long mindis=closest_pair(0,n-1);
