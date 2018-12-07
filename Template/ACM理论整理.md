@@ -1,3 +1,5 @@
+## 常见数值类型范围
+
 ```
 类型          长度 (bit)           有效数字          绝对值范围
 float         32                  6~7              10^(-37) ~ 10^38
@@ -39,38 +41,38 @@ long double   128                 18~19            10^(-4931) ~ 10 ^ 4932
 * #### 使用扩展欧几里德算法解决不定方程的办法:
 
 		对于不定整数方程 ax + by = c, 若 c mod gcd(a, b) = 0, 则该方程存在整数解, 否则不存在整数解.
-		利用扩展欧几里得找到 ax + by = gcd(a, b) 的一组解 x0, y0 后, ax + by = gcd(a, b) 的其他整数解满足:
-			x = x0 + b / gcd(a, b) * t
-			y = y0 - a / gcd(a, b) * t 
-			(其中t为任意整数, x0 y0 是方程一组特解)
-		至于 ax + by = c 的整数解, 只需将 ax + by = gcd(a, b) 的每个解乘上 c / gcd(a, b) 即可.
-		
-		在找到 ax + by = gcd(a, b) 的一组解 x0, y0 后，应该是得到 ax + by = c 的一组解 
-			x1 = x0 * (c / gcd(a, b)), 
-			y1 = y0 * (c / gcd(a, b)),
-		ax + by = c 的其他整数解满足:
-			x = x1 + b / gcd(a, b) * t
-			y = y1 - a / gcd(a, b) * t (其中t为任意整数)
-		x, y 就是 ax + by = c 的所有整数解.
+	​	利用扩展欧几里得找到 ax + by = gcd(a, b) 的一组解 x0, y0 后, ax + by = gcd(a, b) 的其他整数解满足:
+	​		x = x0 + b / gcd(a, b) * t
+	​		y = y0 - a / gcd(a, b) * t 
+	​		(其中t为任意整数, x0 y0 是方程一组特解)
+	​	至于 ax + by = c 的整数解, 只需将 ax + by = gcd(a, b) 的每个解乘上 c / gcd(a, b) 即可.
+	​	
+	​	在找到 ax + by = gcd(a, b) 的一组解 x0, y0 后，应该是得到 ax + by = c 的一组解 
+	​		x1 = x0 * (c / gcd(a, b)), 
+	​		y1 = y0 * (c / gcd(a, b)),
+	​	ax + by = c 的其他整数解满足:
+	​		x = x1 + b / gcd(a, b) * t
+	​		y = y1 - a / gcd(a, b) * t (其中t为任意整数)
+	​	x, y 就是 ax + by = c 的所有整数解.
 	
 * #### 用扩展欧几里德算法求解模线性方程的方法：
 
 	    同余方程 ax ≡ b (mod n) 对于未知数 x 有解, 当且仅当 gcd(a, n) | b 即 b mod gcd(a, n) = 0 . 且方程有解时, 方程有 gcd(a, n) 个解.
-    
+        
 	    求解方程 ax ≡ b (mod n) 相当于求解方程 
 	    	ax + ny = b, (x, y为整数)
-    
+        
 	    设 d = gcd(a, n), 假如整数 x 和 y, 满足 d = ax + ny (用扩展欧几里德得出). 如果 d | b, 则方程 
 	    	a * x0 + n * y0 = d, 
 	    方程两边乘以 b / d, (因为 d|b, 所以能够整除), 得到 
 	    	a * x0 * b / d + n * y0 * b / d = b.
 	    所以 x = x0 * b / d, y = y0 * b / d 为 ax + ny = b 的一个解, 所以 x = x0 * b / d 为 ax = b (mod n) 的解.
-    
+        
 	    ax ≡ b (mod n) 的一个解为 
 	    	x0 = x * (b / d) mod n, 
 	    且方程的 d 个解分别为 
 	    	xi = (x0 + i * (n / d )) mod n {i= 0... d-1}.
-    
+        
 	    设 ans = x * (b / d), s = n / d;
 	    方程 ax ≡ b (mod n) 的最小整数解为: (ans % s + s) % s;
 	
@@ -83,7 +85,7 @@ long double   128                 18~19            10^(-4931) ~ 10 ^ 4932
 	②：对于不等式 a - b >= c , 建一条 b 到 a 的权值为 c 的边, 求的是最长路, 得到的是最小值 
 	③：存在负环的话是无解 
 	④：求不出最短路（dist[ ]没有得到更新）的话是任意解 
-	
+
 ### 有向图 A点恰好走k步(允许重复经过边)到达B点的方案数
 	给定一个有向图, 问从A点恰好走k步(允许重复经过边)到达B点的方案数mod p的值
 	把给定的图转为邻接矩阵, 即 A(i,j) = 1 当且仅当存在一条边 i->j.
@@ -120,3 +122,29 @@ long double   128                 18~19            10^(-4931) ~ 10 ^ 4932
         最多可分为(1/2)*n*(n+1)+1块区域
     折线:
         那就是可以分成（2×n^2-n+1）块区域
+
+## 计算几何
+向量积(叉积): $\vec a * \vec b = |\vec a||\vec b|sin\theta$  模(长度): $|\vec a*\vec b|$ 可以解释为以a和b为邻边的平行四边形的面积, 三角形面积则除2
+
+
+叉积求多边形面积公式: $$S=[(\sum_{i=1}^{n-1}\begin{vmatrix}Xi&Yi\\Xi+1&Yi+1\end{vmatrix})+\begin{vmatrix}Xn&Yn\\X1&Y1\end{vmatrix}]/2​$$
+
+[叉积求多边形面积]: https://www.cnblogs.com/xiexinxinlove/p/3708147.html
+
+叉积求三角形面积: 
+
+​	顶点A$(X1,Y1)$  B$(X2,Y2)$  C$(X3,Y3)$  $\overrightarrow{AB}=(X2-X1,Y2-Y1)$ $\overrightarrow{AC}=(X3-X1,Y3-Y1)$ 
+
+​	面积$S=(\overrightarrow{AB}*\overrightarrow{AC})/2=[(X2-X1)*(Y3-Y1)-(X3-X1)*(Y2-Y1)]/2$ 
+
+质心: $X=(\sum_{i=1}^nXi)/n$   $Y=(\sum_{i=1}^nYi)/n$ 
+
+凸包:
+
+![](/Users/zdz/Downloads/Code/Template/Graham-Scan.png)
+
+[凸包(Graham扫描法)]: https://blog.csdn.net/u012328159/article/details/50808360
+[最远点对(旋转卡壳法)]: https://blog.csdn.net/u012328159/article/details/50809014
+
+平面最近点对: 见kuangbin模版
+
