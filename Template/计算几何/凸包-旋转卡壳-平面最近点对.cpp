@@ -81,7 +81,7 @@ long long closest_pair(int left,int right) {
     sort(closest_t.begin(), closest_t.end(),cmpy);
     int cnt=closest_t.size();
     for (int i=0;i<cnt;i++)
-        for (int j=i+1;j<cnt && (closest_t[j].y-closest_t[i].y)*(closest_t[j].y-closest_t[i].y)<d;j++)
+        for (int j=i+1;j<cnt && (closest_t[j].y-closest_t[i].y)*(closest_t[j].y-closest_t[i].y)<d;j++) // 剪枝很重要
             d=min(d,dis(closest_t[i],closest_t[j]));
 
     return d;

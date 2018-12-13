@@ -42,7 +42,7 @@ void dfs1(int u,int f) {
         if (v==f) continue;
         dfs1(v,u);
         sz[u]+=sz[v];
-        if (sz[v]>sz[son[u]]) son[u]=v;
+        if (!son[u] || sz[v]>sz[son[u]]) son[u]=v;
     }
 }
 
