@@ -5,4 +5,5 @@
 *.gif
 test-Template/*
 *.html
+*.class
 

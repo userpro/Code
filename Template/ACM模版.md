@@ -1,3 +1,74 @@
+-   [组合数学](#组合数学)
+    -   [指数型母函数](#指数型母函数)
+    -   [普通母函数](#普通母函数)
+    -   [错排数](#错排数)
+    -   [组合数C(打表)](#组合数c打表)
+    -   [组合数C](#组合数c)
+-   [图论](#图论)
+    -   [链式前向星+树上最大独立集](#链式前向星树上最大独立集)
+    -   [点分治(树的重心)](#点分治树的重心)
+    -   [树的直径](#树的直径)
+    -   [倍增LCA求树上点的距离](#倍增lca求树上点的距离)
+    -   [倍增LCA求树上dep的k次方](#倍增lca求树上dep的k次方)
+    -   [二分匹配(匈牙利算法)](#二分匹配匈牙利算法)
+    -   [二分匹配(Hopcroft-Carp)](#二分匹配hopcroft-carp)
+    -   [最大流Dinic](#最大流dinic)
+    -   [最大流EK](#最大流ek)
+    -   [最小费用最大流EK](#最小费用最大流ek)
+    -   [最小生成树(Prim)](#最小生成树prim)
+    -   [最小生成树 Kruskal](#最小生成树-kruskal)
+    -   [最小生成树计数](#最小生成树计数)
+    -   [严格次小生成树](#严格次小生成树)
+    -   [最短路Bellman](#最短路bellman)
+    -   [最短路Dijkstra(队列实现)](#最短路dijkstra队列实现)
+    -   [最短路Dijkstra](#最短路dijkstra)
+    -   [最短路Floyd](#最短路floyd)
+    -   [最短路SPFA(判负环)](#最短路spfa判负环)
+    -   [次短路Dijk](#次短路dijk)
+    -   [次短路SPFA](#次短路spfa)
+    -   [Tarjan强连通分量](#tarjan强连通分量)
+    -   [Tarjan求割点和桥](#tarjan求割点和桥)
+    -   [图论汇总](#图论汇总)
+-   [数据结构](#数据结构)
+    -   [单调栈维护凸包](#单调栈维护凸包)
+    -   [单调队列](#单调队列)
+    -   [莫队算法](#莫队算法)
+    -   [并查集](#并查集)
+    -   [树状数组](#树状数组)
+    -   [二维树状数组](#二维树状数组)
+    -   [点分治](#点分治)
+    -   [线段树区间乘](#线段树区间乘)
+    -   [线段树区间和区间开方](#线段树区间和区间开方)
+    -   [线段树扫描线](#线段树扫描线)
+    -   [分块](#分块)
+    -   [ST算法求RMQ问题](#st算法求rmq问题)
+    -   [KDTree(二维最近符合条件点)](#kdtree二维最近符合条件点)
+    -   [树链剖分+动态线段树](#树链剖分动态线段树)
+    -   [字典树Trie](#字典树trie)
+-   [数论](#数论)
+    -   [分解质因子](#分解质因子)
+    -   [容斥原理求互素数个数](#容斥原理求互素数个数)
+    -   [扩展欧几里得算法](#扩展欧几里得算法)
+    -   [欧拉函数](#欧拉函数)
+    -   [求逆元](#求逆元)
+    -   [素数打表](#素数打表)
+    -   [欧拉降幂](#欧拉降幂)
+    -   [Lucas](#lucas)
+-   [其余](#其余)
+    -   [矩阵快速幂](#矩阵快速幂)
+    -   [归并排序](#归并排序)
+    -   [极角排序](#极角排序)
+    -   [数位DP](#数位dp)
+    -   [欧拉序](#欧拉序)
+    -   [DFS序](#dfs序)
+    -   [背包](#背包)
+    -   [蔡勒公式](#蔡勒公式)
+    -   [高精度](#高精度)
+    -   [Base64](#base64)
+    -   [DFS子集生成](#dfs子集生成)
+    -   [LCS & LIS](#lcs-lis)
+    -   [读入优化](#读入优化)
+
 组合数学
 --------
 
@@ -7,7 +78,7 @@
 
 ![指数型母函数应用](/Users/zdz/Downloads/Code/Template/组合数学/指数型母函数应用.jpg)
 
-``` c++
+``` {.cpp}
 #include <iostream>
 #include <cstring>
 #include <cstdio>
@@ -62,7 +133,7 @@ int main()
 
 ### 普通母函数
 
-``` c++
+``` {.cpp}
 #include <iostream>  
 using namespace std;
 const int max = 1000;   
@@ -117,7 +188,7 @@ int main()
 
 ### 错排数
 
-``` c++
+``` {.cpp}
 #define LL long long
 #define MOD 1000000007
 #define MAXN 10010
@@ -133,7 +204,7 @@ void preD()
 
 ### 组合数C(打表)
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 typedef long long LL;
 LL C[40][40];
@@ -152,7 +223,7 @@ void _init()
 
 ### 组合数C
 
-``` c++
+``` {.cpp}
 long long C(int n,int m,int mod) {
     if (m*2>n) m=n-m;
     long long ret=1;
@@ -171,7 +242,7 @@ long long C(int n,int m,int mod) {
 
 ### 链式前向星+树上最大独立集
 
-``` c++
+``` {.cpp}
 // 求树上独立集的最大异或和
 #include <cstdio>
 #include <cstring>
@@ -238,7 +309,7 @@ int main() {
 
 ### 点分治(树的重心)
 
-``` c++
+``` {.cpp}
 // poj1741
 #include <cstdio>
 #include <cstring>
@@ -340,7 +411,7 @@ int main() {
 
 ### 树的直径
 
-``` c++
+``` {.cpp}
 // bzoj 1912 树的直径
 #include <cstdio>
 #include <cstring>
@@ -408,7 +479,7 @@ int main() {
 
 ### 倍增LCA求树上点的距离
 
-``` c++
+``` {.cpp}
 // loj10130 点的距离
 #include <cstdio>
 #include <cstring>
@@ -498,7 +569,7 @@ int main() {
 
 ### 倍增LCA求树上dep的k次方
 
-``` c++
+``` {.cpp}
 // loj10130 点的距离
 #include <cstdio>
 #include <cstring>
@@ -588,7 +659,7 @@ int main() {
 
 ### 二分匹配(匈牙利算法)
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
@@ -633,7 +704,7 @@ int hungray()
 
 ### 二分匹配(Hopcroft-Carp)
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
@@ -730,7 +801,7 @@ int MaxMatch()
 
 ### 最大流Dinic
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 #include <queue>
@@ -829,7 +900,7 @@ struct Dinic
 
 ### 最大流EK
 
-``` c++
+``` {.cpp}
 #include <queue>
 #include <vector>
 #include <cstdio>
@@ -906,7 +977,7 @@ struct EdmondsKarp
 
 ### 最小费用最大流EK
 
-``` c++
+``` {.cpp}
 // hdu5988 最小费用最大流 Tips: log将乘转换为加
 #include <cstdio>
 #include <cstring>
@@ -1024,7 +1095,7 @@ int main() {
 
 ### 最小生成树(Prim)
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 
@@ -1068,7 +1139,7 @@ int main()
 
 ### 最小生成树 Kruskal
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
@@ -1121,7 +1192,7 @@ int main()
 
 ### 最小生成树计数
 
-``` c++
+``` {.cpp}
 // JSOI 2008 最小生成树计数
 #include <cstdio>
 #include <cstring>
@@ -1206,7 +1277,7 @@ int main() {
 
 ### 严格次小生成树
 
-``` c++
+``` {.cpp}
 // bzoj1977
 #include <cstdio>
 #include <cstring>
@@ -1351,7 +1422,7 @@ int main() {
 
 ### 最短路Bellman
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
@@ -1424,7 +1495,7 @@ int main()
 
 ### 最短路Dijkstra(队列实现)
 
-``` c++
+``` {.cpp}
 #include <queue>
 #define INF (1<<29)
 #define MAX 500010
@@ -1484,7 +1555,7 @@ void add_edge(int u, int v, int w)
 
 ### 最短路Dijkstra
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
@@ -1539,7 +1610,7 @@ int main() {
 
 ### 最短路Floyd
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 
@@ -1589,7 +1660,7 @@ int main()
 
 ### 最短路SPFA(判负环)
 
-``` c++
+``` {.cpp}
 #include <vector>
 #include <cstring>
 const int inf=1<<29;
@@ -1647,7 +1718,7 @@ bool spfa(int start, int n) {
 
 ### 次短路Dijk
 
-``` c++
+``` {.cpp}
 #include<iostream>
 #include<cstdio>
 #include<cstring>
@@ -1764,7 +1835,7 @@ int main(){
 
 ### 次短路SPFA
 
-``` c++
+``` {.cpp}
 #include<bits/stdc++.h>
 using namespace std;
 const int MAXR=100000+50;
@@ -1837,7 +1908,7 @@ int main() {
 
 ### Tarjan强连通分量
 
-``` c++
+``` {.cpp}
 // bzoj1051 缩点后判断出度为0的点
 #include <cstdio>
 #include <cstring>
@@ -1920,7 +1991,7 @@ int main() {
 
 ### Tarjan求割点和桥
 
-``` c++
+``` {.cpp}
 #include<iostream>
 #include<cstdio>
 #include<cstring>
@@ -2001,7 +2072,7 @@ int main()
 
 ### 图论汇总
 
-``` c++
+``` {.cpp}
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -2553,7 +2624,7 @@ int main() {
 
 ### 单调栈维护凸包
 
-``` c++
+``` {.cpp}
 // 一个元素向左遍历的第一个比它小的数的位置就是将它插入单调栈时栈顶元素的值，若栈为空，则说明不存在这么一个数。然后将此元素的下标存入栈，就能类似迭代般地求解后面的元素
 // hdu5033 单调栈维护凸包
 #include <cstdio>
@@ -2646,7 +2717,7 @@ int main() {
 
 ### 单调队列
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 using namespace std;
 const int N = 1e6 + 5;
@@ -2680,12 +2751,11 @@ int main()
 
     return 0;
 }
-
 ```
 
 ### 莫队算法
 
-``` c++
+``` {.cpp}
 // bzoj2038 小Z的袜子 莫队算法 对查询分块
 #include <cstdio>
 #include <cstring>
@@ -2757,7 +2827,7 @@ int main() {
 
 ### 并查集
 
-``` c++
+``` {.cpp}
 // hdu3038 并查集
 // 向量思想
 #include <cstdio>
@@ -2797,7 +2867,7 @@ int main() {
 
 ### 树状数组
 
-``` c++
+``` {.cpp}
 int bit[MAXN],n;
 int sum(int i) {
     int s=0;
@@ -2818,7 +2888,7 @@ void add(int i,int x) {
 
 ### 二维树状数组
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
@@ -2862,7 +2932,7 @@ int main() {
 
 ### 点分治
 
-``` c++
+``` {.cpp}
 // poj1741 求树中两个节点d[x]+d[y]<k有多少个 点分治
 #include <cstdio>
 #include <cstring>
@@ -2963,7 +3033,7 @@ int main() {
 
 ### 线段树区间乘
 
-``` c++
+``` {.cpp}
 // bzoj1798 本题要求对p取模 记得开 long long!!!
 #include <cstdio>
 #include <cstring>
@@ -3085,7 +3155,7 @@ int main() {
 
 ### 线段树区间和区间开方
 
-``` c++
+``` {.cpp}
 // bzoj3211  线段树模板题
 // pushup：
 // (1)build的结尾，当叶子节点分别有对应的值后，它的父亲们就等于它们求和。
@@ -3166,7 +3236,7 @@ int main() {
 
 ### 线段树扫描线
 
-``` c++
+``` {.cpp}
 // poj2482 线段树 扫描线 英文情书
 #include <cstdio>
 #include <cstring>
@@ -3232,7 +3302,7 @@ int main() {
 
 ### 分块
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 #include <cmath>
@@ -3302,7 +3372,7 @@ int main() {
 
 ### ST算法求RMQ问题
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
@@ -3334,7 +3404,7 @@ int main() {
 
 ### KDTree(二维最近符合条件点)
 
-``` c++
+``` {.cpp}
 // hdu5992
 #include <cstdio>
 #include <cstring>
@@ -3434,7 +3504,7 @@ int main() {
 
 ### 树链剖分+动态线段树
 
-``` c++
+``` {.cpp}
 // bzoj3531
 // 对于需要n棵线段树维护的情况 可以通过动态线段树(即节点动态生成)
 // 来节约内存 以免MLE
@@ -3579,7 +3649,7 @@ int main() {
 
 ### 字典树Trie
 
-``` c++
+``` {.cpp}
 const int maxn=400010;
 char buf[maxn];
 int sum[maxn];
@@ -3614,7 +3684,7 @@ int find(int n) {
 
 ### 分解质因子
 
-``` c++
+``` {.cpp}
 #include <vector>
 
 using namespace std;
@@ -3636,7 +3706,7 @@ void solve(int n)
 
 ### 容斥原理求互素数个数
 
-``` c++
+``` {.cpp}
 int solve (int n, int r) {
     vector<int> p;
     for (int i=2; i*i<=n; ++i)
@@ -3670,7 +3740,7 @@ int solve (int n, int r) {
 
 ### 扩展欧几里得算法
 
-``` c++
+``` {.cpp}
 // ax + by = gcd(a, b)
 // 返回值是 gcd(a, b)
 int extend_Euclid(int a, int b, int &x, int &y)
@@ -3689,7 +3759,7 @@ int extend_Euclid(int a, int b, int &x, int &y)
 
 ### 欧拉函数
 
-``` c++
+``` {.cpp}
 // 欧拉函数被定义为小于或等于n的数中与n互质的个数
 #include <cstdio>
 #include <cmath>
@@ -3735,7 +3805,7 @@ int main() {
 
 ### 求逆元
 
-``` c++
+``` {.cpp}
 // https://www.cnblogs.com/chendl111/p/5671470.html
 #define LL long long
 
@@ -3793,7 +3863,7 @@ void get_factorial_inverse(int n, int p) {
 
 ### 素数打表
 
-``` c++
+``` {.cpp}
 #include<iostream>
 #include<cstring>
 #include<cstdio>
@@ -3843,7 +3913,7 @@ int main() {
 
 ### 欧拉降幂
 
-``` c++
+``` {.cpp}
 // cf906D Power Tower 欧拉降幂应用
 // n^x mod m=n^(φ(m)+x%φ(m)) mod m 式子当且仅当x>φ(m)时满足
 #include <cstdio>
@@ -3901,7 +3971,7 @@ int main() {
 
 ### Lucas
 
-``` c++
+``` {.cpp}
 long long F[100010];  
 void init(long long p)  
 {  
@@ -3937,7 +4007,7 @@ long long Lucas(long long n,long long m,long long p)
 
 ### 矩阵快速幂
 
-``` c++
+``` {.cpp}
 /* 
     快速幂算法中矩阵上应用
     MOD mat维数 根据题意改变 
@@ -3987,7 +4057,7 @@ Matrix pow_M(Matrix a, int n)
 
 ### 归并排序
 
-``` c++
+``` {.cpp}
 const int maxn = 100000;
 int num[maxn];
 void merge_sort(int l, int r) 
@@ -4017,7 +4087,7 @@ void merge_sort(int l, int r)
 
 ### 极角排序
 
-``` c++
+``` {.cpp}
 struct point
 {
     double x,y;
@@ -4078,7 +4148,7 @@ bool cmp3(point a,point b)  //先按象限从小到大排序 再按极角从小�
 
 ### 数位DP
 
-``` c++
+``` {.cpp}
 
 typedef long long ll;  
 int a[20];  
@@ -4181,7 +4251,7 @@ int main()
 
 ### 欧拉序
 
-``` c++
+``` {.cpp}
 vector<int> g[40010];
 int len_a,a[80020],len_b,b[80020];
 
@@ -4211,7 +4281,7 @@ void dfs(int u,int fa)
 
 ### DFS序
 
-``` c++
+``` {.cpp}
 vector<int> G[MAXN];
 int T,n,m;
 int tot;
@@ -4238,7 +4308,7 @@ void dfs(int u,int fa)
 
 ### 背包
 
-``` c++
+``` {.cpp}
 #include <iostream>  
 #include <cstring>  
 using namespace std;  
@@ -4293,7 +4363,7 @@ int main(void) {
 
 ### 蔡勒公式
 
-``` c++
+``` {.cpp}
 bool isMonday(int year,int month,int day)
 {
     if(month < 3) { year -= 1;  month += 12; }
@@ -4308,7 +4378,7 @@ bool isMonday(int year,int month,int day)
 
 ### 高精度
 
-``` c++
+``` {.cpp}
 #include <string>
 #include <cassert>
 #include <vector>
@@ -4452,7 +4522,7 @@ istream& operator >> (istream& in, BigInteger& x) {
 
 ### Base64
 
-``` c++
+``` {.cpp}
 #include <cstdio>
 #include <cstring>
 
@@ -4516,12 +4586,11 @@ int decode(unsigned char in[], unsigned char out[])
     }
     return t; // 解码后长度
 }
-
 ```
 
 ### DFS子集生成
 
-``` c++
+``` {.cpp}
 // 子集生成 生成[0, n)的所有子集.
 // 用法：
 // dfs(n,0);
@@ -4571,7 +4640,7 @@ int main()
 
 ### LCS & LIS
 
-``` c++
+``` {.cpp}
 // 最长公共子序列
 const int maxn = 10000;
 int dp[maxn];
@@ -4614,7 +4683,7 @@ int lnds() { return LIS(-1); } //求下降的
 
 ### 读入优化
 
-``` c++
+``` {.cpp}
 inline int read() {
     int ret=0;
     char ch=getchar();
