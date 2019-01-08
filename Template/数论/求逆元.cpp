@@ -46,7 +46,7 @@ void get_factorial_inverse(LL n, LL p) {
     for (int i = 1; i <= n; ++i) {
         factor[i] = i * factor[i - 1] % p;
     }
-    invf[n] = qpow(factor[n], p);
+    invf[n] = qpow(factor[n], p-2);
     for (int i = n-1; i >= 0; --i) {
         invf[i] = invf[i + 1] * (i + 1) % p;
     }

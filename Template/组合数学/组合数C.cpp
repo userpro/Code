@@ -1,7 +1,6 @@
 #include <cstdio>
 typedef long long LL;
 LL C[40][40];
-
 void dabiao() {
     C[0][0]=C[1][0]=C[1][1]=1;
     for (int i=2;i<40;i++) {
@@ -11,8 +10,7 @@ void dabiao() {
         C[i][i]=1;
     }
 }
-
-LL getC(int n,int m,int mod) {
+inline LL getC1(int n,int m,int mod) {
     if (m*2>n) m=n-m;
     LL ret=1;
     for (int i=1;i<=m;i++) {
@@ -22,4 +20,8 @@ LL getC(int n,int m,int mod) {
         ret%=mod;
     }
     return ret;
+}
+inline LL getC2(LL n,LL m,LL mod) { // 利用逆元
+    if (m==0 || n==m) return 1;
+    return fac[n]*inv[m]%mod*inv[n-m]%mod;
 }

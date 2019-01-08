@@ -7,30 +7,28 @@ const int maxm=1e7+5;
 int n;
 /* Eratosthenes 筛法 */
 bool visit[maxm];
-int p1[maxn]; 
-// p1的大小大概估计一下再开数组。大概是（x/lnx）
+int p1[maxn]; // p1的大小大概估计一下再开数组。大概是（x/lnx） 
 int pnum; // 素数个数
-void getprime1(int n) {
+void getprime1(int x) {
     memset(visit, false, sizeof(visit));
     int num = 0;
-    for (int i = 2; i <= n; ++i) {
+    for (int i = 2; i <= x; ++i) {
         if ( !visit[i] )  p1[num++] = i;
-        for (int j = 0; j <= num && i * p1[j] <= n ; j++) {
+        for (int j = 0; j <= num && i * p1[j] <= x ; j++) {
             visit[ i  *  p1[j] ]  =  true;
-            if (i % p1[j] == 0) break; 
-            ///此处是重点，避免了很多的重复判断，比如i=9,现在素数是2,3,5,7,进入二重循环，visit[2*9]=1;visit[3*9]=1；这个时候9%3==0，要跳出。因为5*9可以用3*15来代替，如果这个时候计算了，i=15的时候又会被重复计算一次，所以这里大量避免了重复运算。
+            if (i % p1[j] == 0) break;
         }
     }
     pnum = num;
 }
 // 最常用!!!!!!!!
 bool p2[maxn];
-void getprime2(int n) {
+void getprime2(int x) {
     memset(p2,1,sizeof(p2));
     p2[0]=p2[1]=0;
-    for (int i=2;i<n;i++) {
-        if (!p2[i] || i>n/i) continue;
-        for (int j=i+i;j<n;j+=i)
+    for (int i=2;i<x;i++) {
+        if (!p2[i] || i>x/i) continue;
+        for (int j=i+i;j<x;j+=i)
             p2[j]=0;
     }
 }
