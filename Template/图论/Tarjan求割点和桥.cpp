@@ -21,20 +21,20 @@ void input()
         G[b].push_back(a);
     }
 }
-void Tarjan(int i,int Father)
+void Tarjan(int u,int fa)
 {
-    father[i]=Father;/*记录每一个点的父亲*/
-    dfn[i]=low[i]=tim++;
-    for(int j=0;j<G[i].size();++j)
+    father[u]=fa;/*记录每一个点的父亲*/
+    dfn[u]=low[u]=tim++;
+    for(int i=0;i<G[u].size();++i)
     {
-        int k=G[i][j];
-        if(dfn[k]==-1)
+        int v=G[u][i];
+        if(dfn[v]==-1)
         {
-            Tarjan(k,i);
-            low[i]=min(low[i],low[k]);
+            Tarjan(v,u);
+            low[u]=min(low[u],low[v]);
         }
-        else if(Father!=k)/*假如k是i的父亲的话，那么这就是无向边中的重边，有重边那么一定不是桥*/
-            low[i]=min(low[i],dfn[k]);//dfn[k]可能！=low[k]，所以不能用low[k]代替dfn[k],否则会上翻过头了。
+        else if(fa!=v)/*假如v是u的父亲的话，那么这就是无向边中的重边，有重边那么一定不是桥*/
+            low[u]=min(low[u],dfn[v]);//dfn[v]可能！=low[v]，所以不能用low[v]代替dfn[v],否则会上翻过头了。
     }
 }
 void count()

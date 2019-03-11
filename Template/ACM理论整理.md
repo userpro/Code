@@ -134,7 +134,9 @@ long double   128                 18~19            10^(-4931) ~ 10 ^ 4932
 
 叉积求三角形面积: 
 
-​	顶点A$(X1,Y1)$  B$(X2,Y2)$  C$(X3,Y3)$  $\overrightarrow{AB}=(X2-X1,Y2-Y1)$ $\overrightarrow{AC}=(X3-X1,Y3-Y1)$ 
+​	顶点A$(X1,Y1)$  B$(X2,Y2)$  C$(X3,Y3)$ 
+
+​	 $\overrightarrow{AB}=(X2-X1,Y2-Y1)$ $\overrightarrow{AC}=(X3-X1,Y3-Y1)$ 
 
 ​	面积$S=(\overrightarrow{AB}*\overrightarrow{AC})/2=[(X2-X1)*(Y3-Y1)-(X3-X1)*(Y2-Y1)]/2$ 
 
